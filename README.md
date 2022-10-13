@@ -7,7 +7,7 @@ Alter the message type of the messages in the Signal database
 
 According to this: https://www.signal.org/blog/sms-removal-android/
 
-    *If you do use Signal as your default SMS app on Android, you will need to select a new default SMS app on your phone. **If you want to keep them**, you’ll also need to export your SMS messages from Signal into that new app.*
+*If you do use Signal as your default SMS app on Android, you will need to select a new default SMS app on your phone. **If you want to keep them**, you’ll also need to export your SMS messages from Signal into that new app.*
 
 
 ## Change the message type
@@ -41,20 +41,16 @@ Signal -> Chats -> Backups -> Local Backup
 3. Download this repo and run:
 
 ```
-    cd signal-message-changer
-    export SIG_KEY=123451234512345123451234512345
-    make run
+cd signal-message-changer
+export SIG_KEY=123451234512345123451234512345
+make run
 ```
 
 4. A new backup file should be generated. Transfer it back to your phone.
 
 5. Delete Signal from your phone (**only if you're 100% confident that you can use your original backup if things don't work!**)
 
-6. Reinstall Signal, it'll ask you if you've got a backup file that you want to restore from. Select your new file. You will need:
-
-a) The 30 digit passcode
-b) A phone number that you can receive their validation code on
-c) The Signal PIN number that you may have setup
+6. Reinstall Signal, it'll ask you if you've got a backup file that you want to restore from. Select your new file.
 
 
 ## Thoughts
