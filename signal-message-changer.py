@@ -3,7 +3,6 @@ import sys
 import sqlite3
 import logging
 import argparse
-import pkg_resources
 
 parser = argparse.ArgumentParser(description='Update SMS messages to look like native Signal messages OR update Signal messages to look like SMS messages...')
 
@@ -14,23 +13,15 @@ args = parser.parse_args()
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG if args.verbose else logging.INFO)
 
-cur_version = pkg_resources.parse_version(str(sqlite3.sqlite_version))
-min_version = pkg_resources.parse_version("3.35")
-
-# the RETURNING syntax needs sqlite3 version >=3.35
-if cur_version < min_version:
-    logging.info(f"Version of sqlite3 python library is too old, upgrade to {min_version}")
-    logging.info("Try the Docker version for a predictable build environment")
-    sys.exit(1)
-
 
 def run_cmd(cmd):
     logging.info(f"running command: {cmd}")
     r = os.popen(cmd)
     logging.info(r.read())
-    if r.close() is not None:
+    rtn = r.close()
+    if rtn is not None:
         logging.info(f"command failed: {cmd}")
-        sys.exit(r.close())
+        sys.exit(rtn)
 
 
 def print_num_sms():
