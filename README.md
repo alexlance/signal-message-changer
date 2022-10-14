@@ -1,3 +1,12 @@
+# defunct - don't use this
+
+Signal have clarified that they won't delete the messages. So this project can be retired.
+
+https://community.signalusers.org/t/signal-blog-removing-sms-support-from-signal-android-soon/47954/18
+
+
+
+
 # signal-message-changer
 
 Alter the message type of the messages in the Signal database
