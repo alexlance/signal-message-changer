@@ -1,31 +1,20 @@
-# defunct - don't use this
-
-Signal have clarified that they won't delete the messages. So this project can be retired.
-
-https://community.signalusers.org/t/signal-blog-removing-sms-support-from-signal-android-soon/47954/18
-
-
-
-
 # signal-message-changer
 
-Alter the message type of the messages in the Signal database
+Alter the message type of the messages in the Signal database. Three modes:
 
-
-## Signal have made a decision to delete all of your **SMS messages** that reside in Signal...
-
-According to this: https://www.signal.org/blog/sms-removal-android/
-
-*If you do use Signal as your default SMS app on Android, you will need to select a new default SMS app on your phone. **If you want to keep them**, you’ll also need to export your SMS messages from Signal into that new app.*
+1. Default mode: make all your SMS/MMS messages in Signal, look like Signal messages.
+2. --tosms mode: make all your Signal messages look more like SMS/MMS (this *might* help with exporting the entire Signal message store back to Android...)
+3. --undo mode: take previous modifications that have been made with signal-message-changer, and undo them
 
 
 ## Change the message type
 
 This code changes the type of your SMS text messages in Signal, to make them
-look more like Signal messages, so that hopefully they won't all get deleted.
+look more like Signal messages, so that hopefully they won't eventually all get deleted.
 
 Note: future text messages will still need to be sent with a separate SMS app.
-But at least your existing messages won't suddenly disappear.
+But at least your existing messages won't suddenly one day disappear if Signal decides
+to stop showing (or delete) the old messages.
 
 ## Caveats
 
@@ -52,10 +41,11 @@ Signal -> Chats -> Backups -> Local Backup
 ```
 cd signal-message-changer
 export SIG_KEY=123451234512345123451234512345
+export SIG_FILE=signal-2022-06-10-17-00-00.backup
 make run
 ```
 
-4. A new backup file should be generated. Transfer it back to your phone.
+4. A new backup file should be generated named `signal-all-messages.backup`. Transfer it back to your phone.
 
 5. Delete Signal from your phone (**only if you're 100% confident that you can use your original backup if things don't work!**)
 
