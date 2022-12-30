@@ -40,14 +40,14 @@ def print_num_signal():
 
 
 def print_num_mms():
-    q = "select count(*) as tally from mms where msg_box in (20, 87, 23)"
+    q = "select count(*) as tally from mms where type in (20, 87, 23)"
     cursor.execute(q)
     (tally,) = cursor.fetchone()
     logging.info(f"Total num MMS messages: {tally}")
 
 
 def print_num_signal_mms():
-    q = "select count(*) as tally from mms where msg_box in (10485780, 10485783)"
+    q = "select count(*) as tally from mms where type in (10485780, 10485783)"
     cursor.execute(q)
     (tally,) = cursor.fetchone()
     logging.info(f"Total number Signal Multimedia messages: {tally}")
@@ -63,7 +63,7 @@ def undo_changes_to_sms():
 
 def undo_changes_to_mms():
     q = '''update mms set
-             msg_box = original_message_type,
+             type = original_message_type,
              original_message_type = null
            where original_message_type is not null'''
     cursor.execute(q)
@@ -98,23 +98,23 @@ def update_signal_to_sms():
 
 def update_mms_to_signal():
     q = '''update mms
-           set msg_box = case msg_box
+           set type = case type
              when 20 then 10485780
              when 87 then 10485783
            end,
-           original_message_type = msg_box
-           where msg_box in (20,87) and original_message_type is null'''
+           original_message_type = type
+           where type in (20,87) and original_message_type is null'''
     cursor.execute(q)
 
 
 def update_signal_to_mms():
     q = '''update mms
-           set msg_box = case msg_box
+           set type = case type
              when 10485780 then 20
              when 10485783 then 87
            end,
-           original_message_type = msg_box
-           where msg_box in (10485780,10485783) and original_message_type is null'''
+           original_message_type = type
+           where type in (10485780,10485783) and original_message_type is null'''
     cursor.execute(q)
 
 
